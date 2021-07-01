@@ -1,0 +1,39 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+        
+      </style>
+  
+      
+      <!-- Custom styles for this template -->
+      <link href="{% static 'css/signin.css' %}" rel="stylesheet">
+    </head>
+ 
+    <main class="form-signin">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <img class="mb-4" src="{% static 'assets/brand/bootstrap-logo.svg' %}" alt="" width="72" height="57">
+          <h1 class="h3 mb-3 fw-normal">Update Your Profile</h1>
+            {{ form.as_p }}
+            <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Update</button>
+          </div>
+        </form>
+    </main>
+
+{% endblock content %}

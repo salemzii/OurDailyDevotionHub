@@ -1,0 +1,22 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .text-container {
+            text-align: left;
+            margin: 0%;
+            padding: 10%;
+        }
+    </style>
+        <div class="text-container">
+            <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="{{ user.profile.profile_photo.url }}">    
+            
+            <p>{{ user.username }}</p>
+            <p>{{ user.email }}</p>
+            <h2>{{ user.profile.bio }}</h2>
+            {% if request.user == user %}
+                <p><a class="btn btn-secondary" href="{% url 'updateprofile' %}">Update Profile &raquo;</a></p>
+            {% endif %}
+        </div>
+{% endblock content %}

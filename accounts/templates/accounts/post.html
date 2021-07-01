@@ -1,0 +1,73 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        }
+
+        @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+        }
+        .card-body {
+            padding-top: 15%;
+        }
+        .card-bodyy {
+            padding-top: 2%;
+            padding-left: 1%;
+        }
+        .dp img {
+            height: 35px;
+            width: 35px;
+        }
+    </style>
+    {% if post %}
+        <hr>
+        <div class="card-body">
+            <div class="dp">
+                <img src="{{ post.user.profile.profile_photo.url }}" alt="">
+            </div>
+            <div><h3>{{ post.title }}</h3> <strong>Category: </strong><u>{{ devotion.category }}</u></div>
+            <p>
+                {{ post.content }}
+            </p>
+            {% if request.user.is_authenticated %}
+                <div class="d-flex justify-content-between align-items-center">           
+                        <div class="btn-group">
+                            <button data-product="{{ post.id }}" data-action="like" data-user="{{ request.user }}" type="submit" class="btn btn-sm btn-outline-success like-post">Like</button>
+                            <a href="{% url 'comment' post.id %}"><button type="button" class="btn btn-sm btn-outline-primary">Comment</button></a>
+                        </div> 
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-info">Share</button>
+                        <button data-product="{{ post.id }}" data-action="bookmark" data-user="{{ request.user }}" type="button" class="btn btn-sm btn-outline-secondary bookmark">Bookmark</button>
+                    </div>
+                </div>
+            {% endif %}   
+        </div>
+        <hr>  
+    {% endif %}
+    <strong>Comments...</strong>
+    {% for comment in post.comments.all %}
+        <hr>
+        <div class="card-bodyy">
+            <div class="dp">
+                <img src="{{ comment.user.profile.profile_photo.url }}" alt="">
+            </div>
+            <h4>{{ comment.user.username }}</h4>
+            <p>
+                {{ comment.content }}
+            </p>
+        </div>
+        <hr>
+    {% endfor %} 
+
+<script src="{% static 'js/likes.js' %}"></script>
+
+{% endblock content %}

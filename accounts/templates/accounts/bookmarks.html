@@ -1,0 +1,56 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        }
+
+        @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+        }
+        .card-body {
+            padding-top: 5%;
+        }
+        .dp {
+            border-radius: 50px;
+        }
+        .dp img {
+            height: 35px;
+            width: 35px;
+        }
+    </style>
+    {% for bookmark in bookmarks %}
+        <hr>
+        <div class="card-body">
+            <div>
+                <a href="{% url 'topic' bookmark.post.id %}">
+                    <h3>{{ bookmark.post.title }}</h3> 
+                </a>
+                <strong>Category: </strong><u>{{ bookmark.post.category }}</u>
+            </div>
+            <p>
+                {{ bookmark.post.content }}
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <button data-product="{{ post.id }}" data-action="like" data-user="{{ request.user }}" type="submit" class="btn btn-sm btn-outline-success like-post">Like</button>
+                    <a href="{% url 'comment' bookmark.post.id %}"><button type="button" class="btn btn-sm btn-outline-primary">Comment</button></a>
+                </div> 
+            
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-info">Share</button>
+                <button data-product="{{ bookmark.id }}" data-action="delete" data-user="{{ request.user }}" type="button" class="btn btn-sm btn-outline-danger remove-bookmark">Remove</button>
+            </div>        
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock content %}
+

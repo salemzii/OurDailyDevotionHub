@@ -1,0 +1,15 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .text-container {
+            text-align: center;
+            margin: 0%;
+            padding: 10%;
+        }
+    </style>
+    <div class="text-container">
+        <h3>Hi {{ request.user.username }}, thanks for signing up with <strong>OurDevotionalHub,</strong> please click <a href="#">here</a> to verify your mail...</h3>
+    </div>
+{% endblock content %}
